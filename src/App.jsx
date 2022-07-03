@@ -8,12 +8,20 @@ const Wrapper = styled.div`
   margin-top: 2rem;
 `
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 1rem 0;
+`
+
+const HeaderTitle = styled(Typography)`
+  &.MuiTypography-root {
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 0.5rem;
+  }
 `
 
 const StyledDivider = styled(Divider)`
@@ -22,17 +30,15 @@ const StyledDivider = styled(Divider)`
   height: 0.2rem;
 `
 
-function App() {
+export const App = () => {
   return (
     <div className="App">
       <Wrapper>
-        <Header>
-          <Typography variant="h3" fontWeight={200}>4 July, Monday</Typography>
-          <StyledDivider variant="middle" />
-        </Header>
+        <HeaderContainer>
+          <HeaderTitle>4 July, Monday</HeaderTitle>
+          <StyledDivider />
+        </HeaderContainer>
       </Wrapper>
     </div>
   )
 }
-
-export default App
