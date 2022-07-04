@@ -77,7 +77,7 @@ const TodoTitle = styled(Typography)`
   &.MuiTypography-root {
     font-size: 1.25rem;
     font-weight: 400;
-    color: ${props => props.checked ? '#D0D0D0' : 'black'};
+    color: ${props => props.checked ? '#D0D0D0' : '#4B4B4B'};
     text-decoration: ${props => props.checked ? 'line-through' : 'none'};
   }
 `
