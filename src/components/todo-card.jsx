@@ -1,0 +1,85 @@
+import React from 'react'
+import { PropTypes } from 'prop-types'
+import styled from 'styled-components'
+import { Card, Typography, Checkbox } from '@mui/material'
+
+const TodoCardContainer = styled(Card)`
+  width: 90%;
+  height: 3.5rem;
+  display: flex;
+`
+
+const TodoColorTag = styled(Card)`
+  &.MuiCard-root {
+    background-color: ${props => props.color};
+    border-radius: 0.25rem 0 0 0.25rem;
+    box-shadow: none;
+  }
+  width: 1.75rem;
+`
+
+const TodoWhiteBlock = styled(Card)`
+  &.MuiCard-root {
+    border-radius: 0 0.25rem 0.25rem 0;
+    box-shadow: none;
+  }
+  width: calc(100% - 1rem);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  position: relative;
+`
+
+const TodoTitle = styled(Typography)`
+  &.MuiTypography-root {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: ${props => props.checked ? '#D0D0D0' : '#4B4B4B'};
+    text-decoration: ${props => props.checked ? 'line-through' : 'none'};
+  }
+`
+
+const TodoCheckbox = styled(Checkbox)`
+  &.MuiCheckbox-root {
+    color: #CCCCCC;
+    &.Mui-checked {
+      color: #CCCCCC;
+    }
+  }
+`
+
+const TodoTime = styled(Typography)`
+  &.MuiTypography-root {
+    font-size: 1rem;
+    color: ${props => props.checked ? '#D0D0D0' : '#A9A9A9'} ;
+  }
+  position: absolute;
+  right: 1rem;
+`
+
+export const TodoCard = ({ data, checkedTodoIds, handleToggleCheck }) => {
+  return (
+    <TodoCardContainer>
+      <TodoColorTag color={data.color} />
+      <TodoWhiteBlock>
+        <TodoCheckbox 
+          id={data.id}
+          checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}
+          onChange={e => handleToggleCheck(e)} 
+        />
+        <TodoTitle checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}>
+          {data.title}
+        </TodoTitle>
+        {data.time && (
+          <TodoTime checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}>{data.time}</TodoTime>
+        )}
+      </TodoWhiteBlock>
+    </TodoCardContainer>
+  )
+}
+
+TodoCard.propTypes = {
+  data: PropTypes.object.isRequired,
+  checkedTodoIds: PropTypes.array.isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+}

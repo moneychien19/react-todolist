@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import './App.css'
 
-import { Typography, Divider, Card, Checkbox } from '@mui/material'
+import { Typography, Divider } from '@mui/material'
+
+import { TodoCard } from './components/todo-card'
 
 const fakeData = [
   { id: '1', color: '#ADCCFB', title: 'Scrum Planning', checked: false, time: null },
@@ -10,7 +12,7 @@ const fakeData = [
   { id: '3', color: '#CAE9C5', title: 'Todo List Figma 完成', checked: false, time: null },
   { id: '4', color: '#CAE9C5', title: 'Todo List 專案架構', checked: false, time: null },
   { id: '5', color: '#FBC08A', title: '領錢', checked: false, time: '19:00' },
-  { id: '6', color: '#FBC08A', title: '吃維他命', checked: true, time: '14:00' },
+  { id: '6', color: '#FBC08A', title: '吃維他命', checked: false, time: '14:00' },
 ]
 
 const Wrapper = styled.div`
@@ -46,61 +48,22 @@ const StyledDivider = styled(Divider)`
   height: 0.2rem;
 `
 
-const TodoCard = styled(Card)`
-  width: 90%;
-  height: 3.5rem;
-  display: flex;
-`
-
-const TodoColorTag = styled(Card)`
-  &.MuiCard-root {
-    background-color: ${props => props.color};
-    border-radius: 0.25rem 0 0 0.25rem;
-    box-shadow: none;
-  }
-  width: 1.75rem;
-`
-
-const TodoWhiteBlock = styled(Card)`
-  &.MuiCard-root {
-    border-radius: 0 0.25rem 0.25rem 0;
-    box-shadow: none;
-  }
-  width: calc(100% - 1rem);
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
-  position: relative;
-`
-
-const TodoTitle = styled(Typography)`
-  &.MuiTypography-root {
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: ${props => props.checked ? '#D0D0D0' : '#4B4B4B'};
-    text-decoration: ${props => props.checked ? 'line-through' : 'none'};
-  }
-`
-
-const TodoCheckbox = styled(Checkbox)`
-  &.MuiCheckbox-root {
-    color: #CCCCCC;
-    &.Mui-checked {
-      color: #CCCCCC;
-    }
-  }
-`
-
-const TodoTime = styled(Typography)`
-  &.MuiTypography-root {
-    font-size: 1rem;
-    color: ${props => props.checked ? '#D0D0D0' : '#A9A9A9'} ;
-  }
-  position: absolute;
-  right: 1rem;
-`
-
 export const App = () => {
+  const [checkedTodoIds, setCheckedTodoIds] = useState([])
+
+  const handleToggleCheck = event => {
+    const toggleId = event.target.id
+    if (checkedTodoIds.length > 0) {
+      if (checkedTodoIds.includes(toggleId)) {
+        setCheckedTodoIds(JSON.parse(JSON.stringify(checkedTodoIds)).filter(id => id !== toggleId))
+        return
+      }
+    }
+    const newCheckedTodoIds = JSON.parse(JSON.stringify(checkedTodoIds))
+    newCheckedTodoIds.push(toggleId)
+    setCheckedTodoIds(newCheckedTodoIds)
+  }
+
   return (
     <div className="App">
       <Wrapper>
@@ -110,18 +73,11 @@ export const App = () => {
         </HeaderContainer>
         {fakeData.map(data => (
           <ContentContainer key={data.id}>
-            <TodoCard>
-              <TodoColorTag color={data.color} />
-              <TodoWhiteBlock>
-                <TodoCheckbox checked={data.checked} />
-                <TodoTitle checked={data.checked}>
-                  {data.title}
-                </TodoTitle>
-                {data.time && (
-                  <TodoTime checked={data.checked}>{data.time}</TodoTime>
-                )}
-              </TodoWhiteBlock>
-            </TodoCard>
+            <TodoCard 
+              data={data}
+              checkedTodoIds={checkedTodoIds}
+              handleToggleCheck={handleToggleCheck}
+            />
           </ContentContainer>
         ))} 
       </Wrapper>
