@@ -1,7 +1,10 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { Card, Typography, Checkbox } from '@mui/material'
+
+import { selectCheckedTodoIds } from './todoList.slice'
 
 const TodoCardContainer = styled(Card)`
   width: 90%;
@@ -57,7 +60,9 @@ const TodoTime = styled(Typography)`
   right: 1rem;
 `
 
-export const TodoCard = ({ data, checkedTodoIds, handleToggleCheck }) => {
+export const TodoCard = ({ data, handleToggleCheck }) => {
+  const checkedTodoIds = useSelector(selectCheckedTodoIds)
+
   return (
     <TodoCardContainer>
       <TodoColorTag color={data.color} />
@@ -80,6 +85,5 @@ export const TodoCard = ({ data, checkedTodoIds, handleToggleCheck }) => {
 
 TodoCard.propTypes = {
   data: PropTypes.object.isRequired,
-  checkedTodoIds: PropTypes.array.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
 }
