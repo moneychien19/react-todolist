@@ -1,0 +1,47 @@
+type Query {
+  fetchTodos: [Todo]!
+  fetchGroups: [Group]!
+}
+
+type Mutation {
+  createTodo(data: TodoInput!): Todo!
+  deleteTodo(id: ID!): Todo!
+  updateTodo(id: ID!, data: TodoInput!): Todo!
+  createGroup(data: GroupInput!): Group!
+  deleteGroup(id: ID!): Group!
+  updateGroup(id: ID!, data: GroupInput!): Group!
+}
+
+type Todo {
+  id: ID!,
+  title: String!,
+  checked: Bool!,
+  dueTime: Int,
+  groupId: ID!,
+  tomato: Tomato,
+  content: String
+}
+
+type Tomato {
+  finishCount: Int,
+  totalCount: Int!
+}
+
+type Group {
+  id: ID!,
+  name: String!,
+  color: String!
+}
+
+type TodoInput {
+  title: String!,
+  dueTime: Int,
+  groupId: ID!,
+  tomato: Tomato,
+  content: String
+}
+
+type GroupInput {
+  name: String!,
+  color: String!
+}
