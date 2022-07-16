@@ -59,8 +59,7 @@ export const TodoList = () => {
       </HeaderContainer>
       {todos.map(data => (
         <ContentContainer key={data.id}>
-          <TodoCard data={data} handleToggleCheck={handleToggleCheck}
-          />
+          <TodoCard data={data} handleToggleCheck={handleToggleCheck} />
         </ContentContainer>
       ))} 
     </Wrapper>
