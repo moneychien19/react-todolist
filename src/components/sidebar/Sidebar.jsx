@@ -1,16 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Drawer } from '@mui/material'
+import { selectGroups, selectSelectedGroup } from './sidebar.slice'
 import { SidebarItem } from './SidebarItem'
 
 const SIDEBAR_WIDTH = 256
-const groups = [
-  { id: '1', name: '宇匯', color: '#ADCCFB' },
-  { id: '2', name: 'Side Project', color: '#CAE9C5' },
-  { id: '3', name: '雜項', color: '#FBC08A' }
-]
-const selectedGroupId = '1'
 
 export const Sidebar = () => {
+  const groups = useSelector(selectGroups)
+  const selectedGroup = useSelector(selectSelectedGroup)
+
   return (
     <Drawer
       sx={{
@@ -27,11 +26,15 @@ export const Sidebar = () => {
       variant="permanent"
       anchor="left"
     >
-      <SidebarItem title="全部" color="#4B4B4B" selected={selectedGroupId === null}/>
+      <SidebarItem title="全部" color="#4B4B4B" selected={selectedGroup === null}/>
       {groups.map(group => (
-        <div key={group.id}>
-          <SidebarItem title={group.name} color={group.color} selected={selectedGroupId === group.id}/>
-        </div>
+        <SidebarItem
+          key={group.id}
+          id={group.id}
+          title={group.name}
+          color={group.color}
+          selected={selectedGroup?.id === group.id}
+        />
       ))}
     </Drawer>
   )

@@ -1,6 +1,8 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { updateSelectedGroup } from './sidebar.slice'
 import { Card, Typography} from '@mui/material'
 
 const GroupCardContainer = styled(Card)`
@@ -11,6 +13,7 @@ const GroupCardContainer = styled(Card)`
   margin: 0.25rem 1rem;
   &.MuiCard-root {
     box-shadow: none;
+    cursor: pointer;
   }
 `
 
@@ -42,9 +45,14 @@ const GroupName = styled(Typography)`
   }
 `
 
-export const SidebarItem = ({ title, color, selected }) => {
+export const SidebarItem = ({ id, title, color, selected }) => {
+  const dispatch = useDispatch()
+  const handleChangeGroup = id => {
+    dispatch(updateSelectedGroup(id || null))
+  }
+
   return (
-    <GroupCardContainer>
+    <GroupCardContainer onClick={() => handleChangeGroup(id)}>
       <ColorTag color={color} />
       <WhiteBlock selected={selected}>
         <GroupName>
@@ -56,6 +64,7 @@ export const SidebarItem = ({ title, color, selected }) => {
 }
 
 SidebarItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired,

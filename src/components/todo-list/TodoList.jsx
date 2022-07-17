@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Typography, Divider } from '@mui/material'
 
+import { selectSelectedGroup } from '../sidebar/sidebar.slice'
 import { selectTodos, updateTodos } from './todoList.slice'
 import { TodoCard } from './TodoCard'
 
@@ -40,8 +41,10 @@ const StyledDivider = styled(Divider)`
 `
 
 export const TodoList = () => {
+  const selectedGroup = useSelector(selectSelectedGroup)
   const todos = useSelector(selectTodos)
   const dispatch = useDispatch()
+  const todosInGroup = selectedGroup ? todos.filter(todo => todo.groupId === selectedGroup.id) : todos
 
   const handleToggleCheck = event => {
     const toggleId = event.target.id
@@ -57,11 +60,11 @@ export const TodoList = () => {
         <HeaderTitle>4 July, Monday</HeaderTitle>
         <StyledDivider />
       </HeaderContainer>
-      {todos.map(data => (
+      {todosInGroup.map(data => (
         <ContentContainer key={data.id}>
           <TodoCard data={data} handleToggleCheck={handleToggleCheck} />
         </ContentContainer>
-      ))} 
+      ))}
     </Wrapper>
   )
 }
