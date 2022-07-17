@@ -1,29 +1,18 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Typography, Divider } from '@mui/material'
+import { Typography } from '@mui/material'
 
-import { selectSelectedGroup } from '../sidebar/sidebar.slice'
+import { selectTodayString, selectSelectedGroup } from '../sidebar/sidebar.slice'
 import { selectTodos, updateTodos } from './todoList.slice'
 import { TodoCard } from './TodoCard'
 
-const Wrapper = styled.div`
-  margin-top: 2rem;
-`
-
-const HeaderContainer = styled.div`
+const TodoListContainer = styled.div`
+  margin-top: 1rem;
+  margin-left: 18rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 1rem 0;
-`
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem;
+  align-items: flex-start;
 `
 
 const HeaderTitle = styled(Typography)`
@@ -34,13 +23,8 @@ const HeaderTitle = styled(Typography)`
   }
 `
 
-const StyledDivider = styled(Divider)`
-  width: 100%;
-  background-color: #1F4690;
-  height: 0.2rem;
-`
-
 export const TodoList = () => {
+  const todayString = useSelector(selectTodayString)
   const selectedGroup = useSelector(selectSelectedGroup)
   const todos = useSelector(selectTodos)
   const dispatch = useDispatch()
@@ -55,16 +39,11 @@ export const TodoList = () => {
   }
 
   return (
-    <Wrapper>
-      <HeaderContainer>
-        <HeaderTitle>4 July, Monday</HeaderTitle>
-        <StyledDivider />
-      </HeaderContainer>
+    <TodoListContainer>
+      <HeaderTitle>{todayString}</HeaderTitle>
       {todosInGroup.map(data => (
-        <ContentContainer key={data.id}>
-          <TodoCard data={data} handleToggleCheck={handleToggleCheck} />
-        </ContentContainer>
+        <TodoCard key={data.id} data={data} handleToggleCheck={handleToggleCheck} />
       ))}
-    </Wrapper>
+    </TodoListContainer>
   )
 }

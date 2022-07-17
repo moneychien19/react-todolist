@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
 
 const initialState = {
+  todayString: dayjs().format('D MMM, dddd'),
   groups: [
     { id: '1', name: '宇匯', color: '#ADCCFB' },
     { id: '2', name: 'Side Project', color: '#CAE9C5' },
@@ -23,6 +25,7 @@ export const sidebarSlice = createSlice({
 
 export const { updateSelectedGroup } = sidebarSlice.actions
 
+export const selectTodayString = (state) => state.sidebar.todayString
 export const selectGroups = (state) => state.sidebar.groups
 export const selectSelectedGroup = (state) => state.sidebar.selectedGroup
 

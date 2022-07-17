@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 
 import { TodoList } from './components/todo-list/TodoList'
 import { Sidebar } from './components/sidebar/Sidebar'

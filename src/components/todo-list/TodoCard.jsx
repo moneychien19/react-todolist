@@ -7,9 +7,10 @@ import { Card, Typography, Checkbox } from '@mui/material'
 import { selectCheckedTodoIds } from './todoList.slice'
 
 const TodoCardContainer = styled(Card)`
-  width: 90%;
+  width: 32rem;
   height: 3.5rem;
   display: flex;
+  margin: 0.25rem 0;
 `
 
 const TodoColorTag = styled(Card)`
