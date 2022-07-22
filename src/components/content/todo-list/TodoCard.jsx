@@ -10,7 +10,7 @@ const TodoCardContainer = styled(Card)`
   width: 32rem;
   height: 3.5rem;
   display: flex;
-  margin: 0.25rem 0;
+  margin-bottom: 0.5rem;
 `
 
 const TodoColorTag = styled(Card)`
