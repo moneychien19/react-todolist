@@ -8,7 +8,7 @@ import { Typography } from '@mui/material'
 const StyledNavbarContainer = styled.div`
   display: flex;
   /* justify-content: space-around; */
-  margin-left: 18rem;
+  margin-left: 19.5rem;
   margin-top: 1rem;
 `
 
@@ -16,7 +16,6 @@ const StyledDate = styled(Typography)`
   &.MuiTypography-root {
     font-size: 2rem;
     font-weight: 200;
-    margin-bottom: 0.5rem;
   }
 `
 

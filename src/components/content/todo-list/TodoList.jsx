@@ -7,7 +7,7 @@ import { selectTodos, updateTodos } from './todoList.slice'
 import { TodoCard } from './TodoCard'
 
 const TodoListContainer = styled.div`
-  margin-left: 18rem;
+  margin-left: 19.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

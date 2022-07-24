@@ -6,8 +6,8 @@ import { updateSelectedGroup } from './sidebar.slice'
 import { Card, Typography} from '@mui/material'
 
 const GroupCardContainer = styled(Card)`
-  width: 14rem;
-  height: 3rem;
+  width: 16rem;
+  height: 2.25rem;
   display: flex;
   background-color: white;
   margin: 0.25rem 1rem;
@@ -23,7 +23,7 @@ const ColorTag = styled(Card)`
     border-radius: 0.25rem 0 0 0.25rem;
     box-shadow: none;
   }
-  width: 1.25rem;
+  width: 1rem;
 `
 
 const WhiteBlock = styled(Card)`
@@ -32,7 +32,7 @@ const WhiteBlock = styled(Card)`
     box-shadow: none;
     background-color: ${props => props.selected ? '#EFEFEF' : 'white'};
   }
-  width: calc(100% - 1.25rem);
+  width: calc(100% - 1rem);
   display: flex;
   align-items: center;
   padding: 0 0.75rem;
@@ -40,7 +40,7 @@ const WhiteBlock = styled(Card)`
 
 const GroupName = styled(Typography)`
   &.MuiTypography-root {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: '#4B4B4B';
   }
 `

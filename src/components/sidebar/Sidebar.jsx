@@ -4,7 +4,7 @@ import { Drawer } from '@mui/material'
 import { selectGroups, selectSelectedGroup } from './sidebar.slice'
 import { SidebarItem } from './SidebarItem'
 
-const SIDEBAR_WIDTH = 256
+const SIDEBAR_WIDTH = 288
 
 export const Sidebar = () => {
   const groups = useSelector(selectGroups)
