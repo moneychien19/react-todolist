@@ -8,7 +8,7 @@ import { selectCheckedTodoIds } from './todoList.slice'
 
 const TodoCardContainer = styled(Card)`
   width: 32rem;
-  height: 3.5rem;
+  height: 3rem;
   display: flex;
   margin-bottom: 0.5rem;
 `
@@ -19,7 +19,7 @@ const TodoColorTag = styled(Card)`
     border-radius: 0.25rem 0 0 0.25rem;
     box-shadow: none;
   }
-  width: 1.75rem;
+  width: 1.5rem;
 `
 
 const TodoWhiteBlock = styled(Card)`
@@ -27,7 +27,7 @@ const TodoWhiteBlock = styled(Card)`
     border-radius: 0 0.25rem 0.25rem 0;
     box-shadow: none;
   }
-  width: calc(100% - 1rem);
+  width: calc(100% - 1.5rem);
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
@@ -36,7 +36,7 @@ const TodoWhiteBlock = styled(Card)`
 
 const TodoTitle = styled(Typography)`
   &.MuiTypography-root {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 400;
     color: ${props => props.checked ? '#D0D0D0' : '#4B4B4B'};
     text-decoration: ${props => props.checked ? 'line-through' : 'none'};
