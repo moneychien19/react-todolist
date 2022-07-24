@@ -25,6 +25,7 @@ export const TodoList = () => {
     toggleTodo.checked = !toggleTodo.checked
     const newTodos = [toggleTodo, ...todos.filter(todo => todo.id !== toggleId)].sort((a, b) => +a.id - +b.id)
     dispatch(updateTodos(newTodos))
+    event.stopPropagation()
   }
 
   return (

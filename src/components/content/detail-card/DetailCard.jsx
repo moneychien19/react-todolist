@@ -1,8 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { Card, Divider } from '@mui/material'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { GrEdit } from 'react-icons/gr'
+
+import { selectSelectedTodoId, selectTodos } from '../todo-list/todoList.slice'
 
 const StyledDetailCardContainer = styled.div`
   width: 36rem;
@@ -37,17 +40,21 @@ const StyledContentContainer = styled.div`
 `
 
 export const DetailCard = () => {
+  const selectedTodoId = useSelector(selectSelectedTodoId)
+  const todos = useSelector(selectTodos)
+  const selectedTodo = todos.filter(todo => todo.id === selectedTodoId)[0]
+
   return (
     <StyledDetailCardContainer>
       <StyledDetailCard>
         <StyledTitleContainer>
-          <p style={{ color: '#4B4B4B' }}>issue：媒體成本比調整 - CPM</p>
+          <p style={{ color: '#4B4B4B' }}>{selectedTodo.title}</p>
           <RiDeleteBin6Line style={{ color: '#DE7D7D' }} />
         </StyledTitleContainer>
         <div>
           <StyledInfoLineContainer>
             <StyledInfoLineName>番茄數</StyledInfoLineName>
-            <StyledInfoLineContent>1 / 2</StyledInfoLineContent>
+            <StyledInfoLineContent>{selectedTodo.tomato.finishCount} / {selectedTodo.tomato.totalCount}</StyledInfoLineContent>
           </StyledInfoLineContainer>
           <StyledInfoLineContainer>
             <StyledInfoLineName>分類</StyledInfoLineName>

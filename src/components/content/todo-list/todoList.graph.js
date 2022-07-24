@@ -6,7 +6,6 @@ export const FETCH_TODOLIST = gql`
       id
       title
       checked
-      dueTime
       groupId
       content
     }

@@ -1,16 +1,18 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Card, Typography, Checkbox } from '@mui/material'
+import { MdArrowForwardIos } from 'react-icons/md'
 
-import { selectCheckedTodoIds } from './todoList.slice'
+import { selectCheckedTodoIds, selectSelectedTodoId, updateSelectedTodoId } from './todoList.slice'
 
 const TodoCardContainer = styled(Card)`
   width: 32rem;
   height: 3rem;
   display: flex;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 `
 
 const TodoColorTag = styled(Card)`
@@ -24,6 +26,7 @@ const TodoColorTag = styled(Card)`
 
 const TodoWhiteBlock = styled(Card)`
   &.MuiCard-root {
+    background-color: ${props => props.selected ? '#F8F8F8' : '#FFFFFF'};
     border-radius: 0 0.25rem 0.25rem 0;
     box-shadow: none;
   }
@@ -52,22 +55,26 @@ const TodoCheckbox = styled(Checkbox)`
   }
 `
 
-const TodoTime = styled(Typography)`
-  &.MuiTypography-root {
-    font-size: 1rem;
-    color: ${props => props.checked ? '#D0D0D0' : '#A9A9A9'} ;
-  }
+const StyledArrow = styled.p`
+  font-size: 0.75rem;
+  color: '#A9A9A9';
   position: absolute;
-  right: 1rem;
+  right: 0.75rem;
 `
 
 export const TodoCard = ({ data, handleToggleCheck }) => {
   const checkedTodoIds = useSelector(selectCheckedTodoIds)
+  const selectedTodoId = useSelector(selectSelectedTodoId)
+  const dispatch = useDispatch()
+  
+  const handleShowDetail = id => {
+    dispatch(updateSelectedTodoId(id))
+  }
 
   return (
-    <TodoCardContainer>
+    <TodoCardContainer onClick={() => handleShowDetail(data.id)}>
       <TodoColorTag color={data.color} />
-      <TodoWhiteBlock>
+      <TodoWhiteBlock selected={selectedTodoId === data.id}>
         <TodoCheckbox 
           id={data.id}
           checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}
@@ -76,8 +83,10 @@ export const TodoCard = ({ data, handleToggleCheck }) => {
         <TodoTitle checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}>
           {data.title}
         </TodoTitle>
-        {data.time && (
-          <TodoTime checked={checkedTodoIds.length > 0 ? checkedTodoIds.includes(data.id) : false}>{data.time}</TodoTime>
+        {selectedTodoId === data.id && (
+          <StyledArrow>
+            <MdArrowForwardIos />
+          </StyledArrow>
         )}
       </TodoWhiteBlock>
     </TodoCardContainer>
