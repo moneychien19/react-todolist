@@ -26,7 +26,7 @@ const TodoColorTag = styled(Card)`
 
 const TodoWhiteBlock = styled(Card)`
   &.MuiCard-root {
-    background-color: ${props => props.selected ? '#F8F8F8' : '#FFFFFF'};
+    background-color: ${props => props.selected ? '#EFEFEF' : '#FFFFFF'};
     border-radius: 0 0.25rem 0.25rem 0;
     box-shadow: none;
   }

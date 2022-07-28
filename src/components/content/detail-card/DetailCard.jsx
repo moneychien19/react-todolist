@@ -1,15 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 import { Card, Divider } from '@mui/material'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { GrEdit } from 'react-icons/gr'
 
 import { selectSelectedTodoId, selectTodos } from '../todo-list/todoList.slice'
+import { selectGroups } from '../../sidebar/sidebar.slice'
 
 const StyledDetailCardContainer = styled.div`
   width: 36rem;
   margin-left: 1rem;
+  line-height: 1.5rem;
 `
 
 const StyledDetailCard = styled(Card)`
@@ -42,8 +45,10 @@ const StyledContentContainer = styled.div`
 export const DetailCard = () => {
   const selectedTodoId = useSelector(selectSelectedTodoId)
   const todos = useSelector(selectTodos)
+  const groups = useSelector(selectGroups)
   const selectedTodo = todos.filter(todo => todo.id === selectedTodoId)[0]
-
+  const group = groups.filter(group => group.id === selectedTodo.groupId)[0]
+  
   return (
     <StyledDetailCardContainer>
       <StyledDetailCard>
@@ -58,11 +63,11 @@ export const DetailCard = () => {
           </StyledInfoLineContainer>
           <StyledInfoLineContainer>
             <StyledInfoLineName>分類</StyledInfoLineName>
-            <StyledInfoLineContent>宇匯</StyledInfoLineContent>
+            <StyledInfoLineContent>{group.name}</StyledInfoLineContent>
           </StyledInfoLineContainer>
           <StyledInfoLineContainer>
             <StyledInfoLineName>到期日</StyledInfoLineName>
-            <StyledInfoLineContent>2022/07/05</StyledInfoLineContent>
+            <StyledInfoLineContent>{dayjs.unix(selectedTodo.dueTimestamp).format('YYYY/MM/DD')}</StyledInfoLineContent>
           </StyledInfoLineContainer>
         </div>
         <Divider style={{ margin: '1rem 0' }} />

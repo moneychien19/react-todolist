@@ -12,6 +12,7 @@ const initialState = {
         totalCount: 3,
       },
       checked: false,
+      dueTimestamp: 1659283200,
     },
     {
       id: '2',
@@ -23,6 +24,7 @@ const initialState = {
         totalCount: 3,
       },
       checked: false,
+      dueTimestamp: 1658937600,
     },
     {
       id: '3',
@@ -34,6 +36,7 @@ const initialState = {
         totalCount: 4,
       },
       checked: false,
+      dueTimestamp: 1659024000,
     },
     {
       id: '4',
@@ -45,6 +48,7 @@ const initialState = {
         totalCount: 1,
       },
       checked: false,
+      dueTimestamp: 1659024000,
     },
     {
       id: '5',
@@ -56,6 +60,7 @@ const initialState = {
         totalCount: 0,
       },
       checked: false,
+      dueTimestamp: 1659283200,
     },
     {
       id: '6',
@@ -67,6 +72,7 @@ const initialState = {
         totalCount: 0,
       },
       checked: false,
+      dueTimestamp: 1658592000,
     },
   ],
   selectedTodoId: '1',
