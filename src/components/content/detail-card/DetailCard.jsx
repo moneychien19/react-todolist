@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
+import InnerHTML from 'dangerously-set-html-content'
 import { Card, Divider } from '@mui/material'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { GrEdit } from 'react-icons/gr'
@@ -21,9 +22,17 @@ const StyledDetailCard = styled(Card)`
 const StyledTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 1.25rem;
+  align-items: flex-start;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   margin-bottom: 1rem;
+`
+const StyledDeleteIcon = styled(RiDeleteBin6Line)`
+  color: #DE7D7D;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  cursor: pointer;
 `
 const StyledInfoLineContainer = styled.div`
   display: flex;
@@ -34,12 +43,18 @@ const StyledInfoLineName = styled.p`
   width: 8rem;
 `
 const StyledInfoLineContent = styled.p`
-  color: '#4B4B4B';
+  color: #4B4B4B;
 `
 const StyledContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+`
+const StyledEditIcon = styled(GrEdit)`
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.2rem;
+  cursor: pointer;
 `
 
 export const DetailCard = () => {
@@ -54,7 +69,7 @@ export const DetailCard = () => {
       <StyledDetailCard>
         <StyledTitleContainer>
           <p style={{ color: '#4B4B4B' }}>{selectedTodo.title}</p>
-          <RiDeleteBin6Line style={{ color: '#DE7D7D' }} />
+          <StyledDeleteIcon />
         </StyledTitleContainer>
         <div>
           <StyledInfoLineContainer>
@@ -73,9 +88,9 @@ export const DetailCard = () => {
         <Divider style={{ margin: '1rem 0' }} />
         <StyledContentContainer>
           <div>
-            <p>初始點數：2</p>
+            <InnerHTML html={selectedTodo.details} />
           </div>
-          <GrEdit />
+          <StyledEditIcon />
         </StyledContentContainer>
       </StyledDetailCard>
     </StyledDetailCardContainer>

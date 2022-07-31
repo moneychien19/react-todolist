@@ -9,7 +9,7 @@ import { selectCheckedTodoIds, selectSelectedTodoId, updateSelectedTodoId } from
 
 const TodoCardContainer = styled(Card)`
   width: 32rem;
-  height: 3rem;
+  height: 2.75rem;
   display: flex;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -21,7 +21,7 @@ const TodoColorTag = styled(Card)`
     border-radius: 0.25rem 0 0 0.25rem;
     box-shadow: none;
   }
-  width: 1.5rem;
+  width: 1.25rem;
 `
 
 const TodoWhiteBlock = styled(Card)`
@@ -30,7 +30,7 @@ const TodoWhiteBlock = styled(Card)`
     border-radius: 0 0.25rem 0.25rem 0;
     box-shadow: none;
   }
-  width: calc(100% - 1.5rem);
+  width: calc(100% - 1.25rem);
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
@@ -39,10 +39,14 @@ const TodoWhiteBlock = styled(Card)`
 
 const TodoTitle = styled(Typography)`
   &.MuiTypography-root {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 400;
     color: ${props => props.checked ? '#D0D0D0' : '#4B4B4B'};
     text-decoration: ${props => props.checked ? 'line-through' : 'none'};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 85%;
   }
 `
 
